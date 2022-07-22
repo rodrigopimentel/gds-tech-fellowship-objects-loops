@@ -27,35 +27,38 @@ let recipes = [
     }
 ]
 
-// Your code goes here:
-
-// Each recipe should be in its own div, that can be recCont. We are declaring it here since we will want to change its value with each itteration of the loop.
-
 const recipeDivFactory = (recipeObj) => {
     let newDiv = document.createElement('div');
     newDiv.setAttribute('class', 'recipe');
-    document.getElementById('recipes').appendChild(newDiv);
+    document.getElementsByClassName('recipes')[0].appendChild(newDiv);
 
     let newTitle = document.createElement('recipe-title');
     newTitle.setAttribute('class', 'recipe-title');
-    newTitle.innerHTML = `${recipeObj.title}`;
+    newTitle.innerHTML = `<h1>${recipeObj.title}</h1>`;
     newDiv.appendChild(newTitle);
 
     let newTime = document.createElement('recipe-time');
     newTime.setAttribute('class', 'recipe-time');
-    newTime.innerHTML = `${recipeObj.time}`;
+    newTime.innerHTML = `<p><span class='time-span'>Time:</span> ${recipeObj.time}</p>`;
     newDiv.appendChild(newTime);
 
+    let newCalories = document.createElement('recipe-calories');
+    newCalories.setAttribute('class', 'recipe-calories');
+    newCalories.innerHTML = `<p><span class='calories-span'>Calories:</span> ${recipeObj.calories}`;
+    newDiv.appendChild(newCalories);
+
     let newList = document.createElement('ul');
-    newList.setAttribute('class', 'new-ingredients');
+    newList.setAttribute('class', 'recipe-ingredients');
     newDiv.appendChild(newList);
 
-    
-
-    
+    recipeObj.ingredients.forEach(ingredient => {
+        let newIngredient = document.createElement('li');
+        newIngredient.setAttribute('class', 'recipe-ingredient');
+        newIngredient.innerHTML = ingredient;
+        newList.append(newIngredient);
+    });
 };
 
 
-let recCont
-
-// HINT: Using .map will be very helpful when itterating through the ingredients array.
+console.log('Hello');
+recipes.forEach(recipe => recipeDivFactory(recipe));
